@@ -20,4 +20,10 @@ public class TransacaoController {
        service.createTransacao(transacao);
        return ResponseEntity.ok(HttpStatus.CREATED);
    }
+
+    @DeleteMapping("/all")
+    public ResponseEntity<HttpStatus> deleteAll(){
+        service.deleteAllTransacao();
+        return ResponseEntity.ok(HttpStatus.OK);
+    }
 }
