@@ -1,5 +1,6 @@
 package com.practice.transacstat.estatistica;
 
+import com.practice.transacstat.configuration.EstatisticaProperties;
 import com.practice.transacstat.transacao.TransacaoService;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +18,7 @@ public class EstatisticaService {
     }
 
     public Estatistica calculeStatic(){
-        OffsetDateTime now = OffsetDateTime.now().withOffsetSameLocal(ZoneOffset.UTC);
+        OffsetDateTime now = OffsetDateTime.now(ZoneOffset.UTC).minusSeconds(EstatisticaProperties.securityTime);
 
         DoubleStream values = transacaoService.getTransacaoList().stream()
                 .filter(transacao -> transacao.getDataHora().isAfter(now))
