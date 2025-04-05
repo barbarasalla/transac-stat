@@ -18,7 +18,7 @@ public class TransacaoController {
     @PostMapping
     public ResponseEntity<HttpStatus> create(@RequestBody @Valid Transacao transacao){
        service.createTransacao(transacao);
-       return ResponseEntity.ok(HttpStatus.CREATED);
+       return ResponseEntity.status(HttpStatus.CREATED).build();
    }
 
     @DeleteMapping("/all")
