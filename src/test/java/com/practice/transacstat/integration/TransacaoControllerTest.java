@@ -24,7 +24,7 @@ public class TransacaoControllerTest {
     void createTransacaoWithSucess() throws Exception {
         mockMvc.perform(post("/transacao")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content("{\"valor\": 100.0, \"dataHora\": \"2024-04-04T10:00:00-03:00\"}"))
+                        .content("{\"valor\": 100.0, \"dataHora\": \"2024-04-04T10:00:00+03:00\"}"))
                 .andExpect(status().isCreated());
     }
 

@@ -4,7 +4,6 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
-import java.time.ZoneId;
 import java.util.List;
 
 @Service
@@ -35,8 +34,7 @@ public class TransacaoServiceImpl implements TransacaoService {
     }
 
     private void validFieldDateTransacao(Transacao transacao) {
-        if (transacao.getDataHora().atZoneSimilarLocal(ZoneId.of("America/Sao_Paulo"))
-                .isAfter(OffsetDateTime.now().atZoneSimilarLocal(ZoneId.of("America/Sao_Paulo")))){
+        if (transacao.getDataHora().isAfter(OffsetDateTime.now())){
             throw new IllegalArgumentException("A data da transação não é válida.");
         }
     }

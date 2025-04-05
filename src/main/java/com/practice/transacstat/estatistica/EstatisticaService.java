@@ -3,6 +3,8 @@ package com.practice.transacstat.estatistica;
 import com.practice.transacstat.transacao.TransacaoService;
 import org.springframework.stereotype.Service;
 
+import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
 import java.util.stream.DoubleStream;
 
 @Service
@@ -15,7 +17,11 @@ public class EstatisticaService {
     }
 
     public Estatistica calculeStatic(){
-        DoubleStream values = transacaoService.getTransacaoList().stream().mapToDouble(transacao -> transacao.getValor().doubleValue());
+        OffsetDateTime now = OffsetDateTime.now().withOffsetSameLocal(ZoneOffset.UTC);
+
+        DoubleStream values = transacaoService.getTransacaoList().stream()
+                .filter(transacao -> transacao.getDataHora().isAfter(now))
+                .mapToDouble(transacao -> transacao.getValor().doubleValue());
         return new Estatistica(values.summaryStatistics());
     }
 }
