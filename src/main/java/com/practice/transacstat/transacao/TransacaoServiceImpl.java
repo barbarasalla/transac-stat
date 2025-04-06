@@ -1,5 +1,6 @@
 package com.practice.transacstat.transacao;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -7,6 +8,7 @@ import java.time.OffsetDateTime;
 import java.util.List;
 
 @Service
+@Slf4j
 public class TransacaoServiceImpl implements TransacaoService {
 
     private final TransacaoRepository repository;
@@ -17,10 +19,12 @@ public class TransacaoServiceImpl implements TransacaoService {
 
     @Override
     public void createTransacao(Transacao transacao){
+        log.info("Iniciando processamento de transação.");
         validFieldDateTransacao(transacao);
         validFieldValorTransacao(transacao);
 
         repository.add(transacao);
+        log.info("Transação registrada com sucesso.");
     }
 
     @Override
